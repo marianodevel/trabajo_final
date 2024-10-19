@@ -1,89 +1,88 @@
 from flask_restful import Resource
 from flask import request
-
 import json
-
-import vinoteca
 
 from modelos.bodega import Bodega
 from modelos.cepa import Cepa
 from modelos.vino import Vino
+from vinoteca import Vinoteca
 
 
 class RecursoBodega(Resource):
-
     def get(self, id):
-        bodega = vinoteca.Vinoteca.buscarBodega(id)
+        bodega = Vinoteca.buscar_bodega(id)
         if isinstance(bodega, Bodega):
-            return json.loads(json.dumps(bodega.convertirAJSONFull())), 200
-        else:
-            return {"error": "Bodega no encontrada"}, 404
+            return json.loads(json.dumps(bodega.convertir_a_json_full())), 200
+        return {"error": "Bodega no encontrada"}, 404
 
 
 class RecursoBodegas(Resource):
-
     def get(self):
         orden = request.args.get("orden")
         if orden:
             reverso = request.args.get("reverso")
-            bodegas = vinoteca.Vinoteca.obtenerBodegas(
-                orden=orden, reverso=reverso == "si"
+            bodegas = Vinoteca.obtener_bodegas(
+                orden=orden, 
+                reverso=reverso == "si"
             )
         else:
-            bodegas = vinoteca.Vinoteca.obtenerBodegas()
+            bodegas = Vinoteca.obtener_bodegas()
+        
         return (
-            json.loads(json.dumps(bodegas, default=lambda o: o.convertirAJSON())),
+            json.loads(json.dumps(bodegas, default=lambda o: o.convertir_a_json())),
             200,
         )
 
 
 class RecursoCepa(Resource):
-
     def get(self, id):
-        cepa = vinoteca.Vinoteca.buscarCepa(id)
+        cepa = Vinoteca.buscar_cepa(id)
         if isinstance(cepa, Cepa):
-            return json.loads(json.dumps(cepa.convertirAJSONFull())), 200
-        else:
-            return {"error": "Cepa no encontrada"}, 404
+            return json.loads(json.dumps(cepa.convertir_a_json_full())), 200
+        return {"error": "Cepa no encontrada"}, 404
 
 
 class RecursoCepas(Resource):
-
     def get(self):
         orden = request.args.get("orden")
         if orden:
             reverso = request.args.get("reverso")
-            cepas = vinoteca.Vinoteca.obtenerCepas(orden=orden, reverso=reverso == "si")
+            cepas = Vinoteca.obtener_cepas(
+                orden=orden,
+                reverso=reverso == "si"
+            )
         else:
-            cepas = vinoteca.Vinoteca.obtenerCepas()
+            cepas = Vinoteca.obtener_cepas()
+        
         return (
-            json.loads(json.dumps(cepas, default=lambda o: o.convertirAJSONFull())),
+            json.loads(json.dumps(cepas, default=lambda o: o.convertir_a_json_full())),
             200,
         )
 
 
 class RecursoVino(Resource):
-
     def get(self, id):
-        vino = vinoteca.Vinoteca.buscarVino(id)
+        vino = Vinoteca.buscar_vino(id)
         if isinstance(vino, Vino):
-            return json.loads(json.dumps(vino.convertirAJSONFull())), 200
-        else:
-            return {"error": "Vino no encontrado"}, 404
+            return json.loads(json.dumps(vino.convertir_a_json_full())), 200
+        return {"error": "Vino no encontrado"}, 404
 
 
 class RecursoVinos(Resource):
-
     def get(self):
         anio = request.args.get("anio")
         if anio:
             anio = int(anio)
+            
         orden = request.args.get("orden")
         if orden:
             reverso = request.args.get("reverso")
-            vinos = vinoteca.Vinoteca.obtenerVinos(
-                anio, orden=orden, reverso=reverso == "si"
+            vinos = Vinoteca.obtener_vinos(
+                anio,
+                orden=orden,
+                reverso=reverso == "si"
             )
         else:
-            vinos = vinoteca.Vinoteca.obtenerVinos(anio)
-        return json.loads(json.dumps(vinos, default=lambda o: o.convertirAJSON())), 200
+            vinos = Vinoteca.obtener_vinos(anio)
+            
+        return json.loads(json.dumps(vinos, default=lambda o: o.convertir_a_json())), 200
