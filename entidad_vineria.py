@@ -9,7 +9,7 @@ class EntidadVineria(ABC):
         self._nombre = nombre
     
     def obtener_id(self) -> str:
-        return self._id
+        return self._id_
     
     def obtener_nombre(self) -> str:
         return self._nombre

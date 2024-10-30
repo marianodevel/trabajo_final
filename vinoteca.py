@@ -1,5 +1,6 @@
+"""Módulo para gestionar datos y operaciones de la vinoteca."""
 import json
-from typing import List, Dict, Optional
+import os
 
 from modelos.bodega import Bodega
 from modelos.cepa import Cepa
@@ -7,212 +8,137 @@ from modelos.vino import Vino
 
 
 class Vinoteca:
-    # Atributos de clase
+    """Clase para gestionar operaciones de vinoteca incluyendo vinos, bodegas y cepas."""
+
     __archivo_de_datos = "vinoteca.json"
-    __bodegas: List[Bodega] = []
-    __cepas: List[Cepa] = []
-    __vinos: List[Vino] = []
+    __bodegas = []
+    __cepas = []
+    __vinos = []
 
     @classmethod
-    def inicializar(cls) -> None:
-        """Inicializa las colecciones de la Vinoteca desde el archivo JSON."""
+    def inicializar(cls):
+        """Inicializa los datos de la vinoteca desde el archivo JSON."""
         datos = cls.__parsear_archivo_de_datos()
         cls.__convertir_json_a_listas(datos)
 
     @classmethod
-    def obtener_bodegas(
-        cls,
-        orden: Optional[str] = None,
-        reverso: bool = False
-    ) -> List[Bodega]:
+    def obtener_bodegas(cls, orden=None, reverso=False):
         """
-        Obtiene la lista de bodegas, opcionalmente ordenada.
-        
+        Obtiene lista de bodegas con ordenamiento opcional.
+
         Args:
-            orden: Criterio de ordenamiento ('nombre' o 'vinos')
-            reverso: True para orden descendente, False para ascendente
-            
+            orden (str, opcional): Criterio de ordenamiento ('nombre' o 'vinos').
+                                 Por defecto None.
+            reverso (bool, opcional): Orden inverso. Por defecto False.
+
         Returns:
-            Lista de bodegas ordenada según los criterios especificados
+            list: Lista de objetos Bodega
         """
-        if orden is None:
-            return cls.__bodegas
-        
-        if orden == "nombre":
-            return sorted(
-                cls.__bodegas,
-                key=lambda x: x.obtener_nombre(),
-                reverse=reverso
-            )
-        elif orden == "vinos":
-            return sorted(
-                cls.__bodegas,
-                key=lambda x: len(x.obtener_vinos()),
-                reverse=reverso
-            )
-        return cls.__bodegas
+        if isinstance(orden, str):
+            if orden == "nombre":
+                pass  # completar
+            elif orden == "vinos":
+                pass  # completar
+        pass  # completar
 
     @classmethod
-    def obtener_cepas(
-        cls,
-        orden: Optional[str] = None,
-        reverso: bool = False
-    ) -> List[Cepa]:
+    def obtener_cepas(cls, orden=None, reverso=False):
         """
-        Obtiene la lista de cepas, opcionalmente ordenada.
-        
+        Obtiene lista de cepas con ordenamiento opcional.
+
         Args:
-            orden: Criterio de ordenamiento ('nombre')
-            reverso: True para orden descendente, False para ascendente
-            
+            orden (str, opcional): Criterio de ordenamiento ('nombre'). 
+                                 Por defecto None.
+            reverso (bool, opcional): Orden inverso. Por defecto False.
+
         Returns:
-            Lista de cepas ordenada según los criterios especificados
+            list: Lista de objetos Cepa
         """
-        if orden is None:
-            return cls.__cepas
-        
-        if orden == "nombre":
-            return sorted(
-                cls.__cepas,
-                key=lambda x: x.obtener_nombre(),
-                reverse=reverso
-            )
-        return cls.__cepas
+        if isinstance(orden, str):
+            if orden == "nombre":
+                pass  # completar
+        pass  # completar
 
     @classmethod
-    def obtener_vinos(
-        cls,
-        anio: Optional[int] = None,
-        orden: Optional[str] = None,
-        reverso: bool = False
-    ) -> List[Vino]:
+    def obtener_vinos(cls, anio=None, orden=None, reverso=False):
         """
-        Obtiene la lista de vinos, opcionalmente filtrada por año y ordenada.
-        
+        Obtiene lista de vinos con filtrado y ordenamiento opcional.
+
         Args:
-            anio: Año para filtrar las partidas
-            orden: Criterio de ordenamiento ('nombre', 'bodega' o 'cepas')
-            reverso: True para orden descendente, False para ascendente
-            
+            anio (int, opcional): Filtrar por año. Por defecto None.
+            orden (str, opcional): Criterio de ordenamiento ('nombre', 'bodega',
+                                 o 'cepas'). Por defecto None.
+            reverso (bool, opcional): Orden inverso. Por defecto False.
+
         Returns:
-            Lista de vinos filtrada y ordenada según los criterios especificados
+            list: Lista de objetos Vino
         """
-        vinos = cls.__vinos
-        
-        if anio is not None:
-            vinos = [vino for vino in vinos if anio in vino.obtener_partidas()]
-        
-        if orden is None:
-            return vinos
-        
-        if orden == "nombre":
-            return sorted(
-                vinos,
-                key=lambda x: x.obtener_nombre(),
-                reverse=reverso
-            )
-        elif orden == "bodega":
-            return sorted(
-                vinos,
-                key=lambda x: x.obtener_bodega().obtener_nombre(),
-                reverse=reverso
-            )
-        elif orden == "cepas":
-            return sorted(
-                vinos,
-                key=lambda x: len(x.obtener_cepas()),
-                reverse=reverso
-            )
-        return vinos
+        if isinstance(anio, int):
+            pass  # completar
+        if isinstance(orden, str):
+            if orden == "nombre":
+                pass  # completar
+            elif orden == "bodega":
+                pass  # completar
+            elif orden == "cepas":
+                pass  # completar
+        pass  # completar
 
     @classmethod
-    def buscar_bodega(cls, id: str) -> Optional[Bodega]:
+    def buscar_bodega(cls, id):
         """
-        Busca una bodega por su ID.
-        
+        Busca una bodega por ID.
+
         Args:
-            id: ID de la bodega a buscar
-            
+            id (str): ID de la bodega
+
         Returns:
-            Bodega encontrada o None si no existe
+            Bodega: Objeto Bodega correspondiente o None
         """
-        for bodega in cls.__bodegas:
-            if bodega.obtener_id() == id:
-                return bodega
-        return None
+        pass  # completar
 
     @classmethod
-    def buscar_cepa(cls, id: str) -> Optional[Cepa]:
+    def buscar_cepa(cls, id):
         """
-        Busca una cepa por su ID.
-        
+        Busca una cepa por ID.
+
         Args:
-            id: ID de la cepa a buscar
-            
+            id (str): ID de la cepa
+
         Returns:
-            Cepa encontrada o None si no existe
+            Cepa: Objeto Cepa correspondiente o None
         """
-        for cepa in cls.__cepas:
-            if cepa.obtener_id() == id:
-                return cepa
-        return None
+        pass  # completar
 
     @classmethod
-    def buscar_vino(cls, id: str) -> Optional[Vino]:
+    def buscar_vino(cls, id):
         """
-        Busca un vino por su ID.
-        
+        Busca un vino por ID.
+
         Args:
-            id: ID del vino a buscar
-            
+            id (str): ID del vino
+
         Returns:
-            Vino encontrado o None si no existe
+            Vino: Objeto Vino correspondiente o None
         """
-        for vino in cls.__vinos:
-            if vino.obtener_id() == id:
-                return vino
-        return None
+        pass  # completar
 
     @classmethod
-    def __parsear_archivo_de_datos(cls) -> Dict:
+    def __parsear_archivo_de_datos(cls):
         """
-        Lee y parsea el archivo JSON de datos.
-        
+        Parsea el archivo de datos JSON.
+
         Returns:
-            Diccionario con los datos del archivo
+            dict: Datos JSON parseados
         """
-        try:
-            with open(cls.__archivo_de_datos, 'r', encoding='utf-8') as archivo:
-                return json.load(archivo)
-        except Exception as e:
-            print(f"Error al leer el archivo de datos: {e}")
-            return {"bodegas": [], "cepas": [], "vinos": []}
+        pass  # completar
 
     @classmethod
-    def __convertir_json_a_listas(cls, datos: Dict) -> None:
+    def __convertir_json_a_listas(cls, lista):
         """
-        Convierte los datos JSON a objetos y los almacena en las listas.
-        
+        Convierte datos JSON a listas internas.
+
         Args:
-            datos: Diccionario con los datos a convertir
+            lista (dict): Datos JSON parseados
         """
-        cls.__bodegas = [
-            Bodega(bodega["id"], bodega["nombre"])
-            for bodega in datos.get("bodegas", [])
-        ]
-        
-        cls.__cepas = [
-            Cepa(cepa["id"], cepa["nombre"])
-            for cepa in datos.get("cepas", [])
-        ]
-        
-        cls.__vinos = [
-            Vino(
-                vino["id"],
-                vino["nombre"],
-                vino["bodega"],
-                vino["cepas"],
-                vino["partidas"]
-            )
-            for vino in datos.get("vinos", [])
-        ]
+        pass  # completar
