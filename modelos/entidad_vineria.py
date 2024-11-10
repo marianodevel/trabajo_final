@@ -10,15 +10,15 @@ class EntidadVineria(ABC):
     implementando la funcionalidad básica de identificación y nombre.
     """
     
-    def __init__(self, id_: str, nombre: str) -> None:
+    def __init__(self, id: str, nombre: str) -> None:
         """
         Inicializa una nueva instancia de EntidadVineria.
 
         Args:
-            id_: Identificador único de la entidad
+            id: Identificador único de la entidad
             nombre: Nombre de la entidad
         """
-        self._id = id_
+        self._id = id
         self._nombre = nombre
 
     def establecer_nombre(self, nombre: str) -> None:

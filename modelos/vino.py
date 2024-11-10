@@ -15,19 +15,19 @@ class Vino(EntidadVineria):
     cepas y partidas asociadas.
     """
     
-    def __init__(self, id_: str, nombre: str, bodega_id: str, 
+    def __init__(self, id: str, nombre: str, bodega_id: str, 
                  cepa_ids: List[str], partidas: List[int]) -> None:
         """
         Inicializa una instancia de Vino.
 
         Args:
-            id_: Identificador único del vino
+            id: Identificador único del vino
             nombre: Nombre del vino
             bodega_id: Identificador de la bodega productora
             cepa_ids: Lista de identificadores de cepas utilizadas
             partidas: Lista de años de las partidas disponibles
         """
-        super().__init__(id_, nombre)
+        super().__init__(id, nombre)
         self._bodega_id = bodega_id
         self._cepa_ids = cepa_ids
         self._partidas = partidas

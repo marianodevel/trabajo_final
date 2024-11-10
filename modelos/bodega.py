@@ -15,15 +15,15 @@ class Bodega(EntidadVineria):
     gestionar vinos y cepas asociadas.
     """
 
-    def __init__(self, id_: str, nombre: str) -> None:
+    def __init__(self, id: str, nombre: str) -> None:
         """
         Inicializa una nueva instancia de Bodega.
 
         Args:
-            id_: Identificador único de la bodega
+            id: Identificador único de la bodega
             nombre: Nombre de la bodega
         """
-        super().__init__(id_, nombre)
+        super().__init__(id, nombre)
 
     def obtener_vinos(self) -> List['Vino']:
         """
