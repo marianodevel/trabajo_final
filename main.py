@@ -20,101 +20,109 @@ TEMPLATE_HTML = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vinoteca API</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1 {
-            color: #722F37;
-            text-align: center;
-            border-bottom: 2px solid #722F37;
-            padding-bottom: 10px;
-        }
-        .menu {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .menu h2 {
-            color: #722F37;
-            margin-top: 0;
-        }
-        .menu-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: white;
-            border-radius: 3px;
-        }
-        a {
-            color: #722F37;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .descripcion {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Bienvenido a la API de Vinoteca</h1>
+    <h1>Documentación API de Vinoteca</h1>
     
     <div class="menu">
-        <h2>Menú de Ejemplos</h2>
-        
-        <div class="menu-item">
-            <a href="/api/bodegas/a0900e61-0f72-67ae-7e9d-4218da29b7d8">Ver Bodega Casa La Primavera</a>
-            <div class="descripcion">Detalles de la bodega específica</div>
+        <div class="route-section">
+            <h2>Bodegas</h2>
+            <div class="route-item">
+                <span class="route-method">GET</span>
+                <span class="route-path">/api/bodegas</span>
+                <div class="description">
+                    Obtiene lista de todas las bodegas.
+                    <br>
+                    Parámetros opcionales:
+                    <ul>
+                        <li>orden: Campo por el cual ordenar (nombre, id)</li>
+                        <li>reverso: "si" para orden descendente</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="route-item">
+                <span class="route-method">GET</span>
+                <span class="route-path">/api/bodegas/&lt;id_&gt;</span>
+                <div class="description">Obtiene detalles de una bodega específica por ID</div>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <a href="/api/cepas/33ccaa9d-4710-9942-002d-1b5cb9912e5d">Ver Cepa Chardonnay</a>
-            <div class="descripcion">Información detallada de la cepa</div>
+
+        <div class="route-section">
+            <h2>Cepas</h2>
+            <div class="route-item">
+                <span class="route-method">GET</span>
+                <span class="route-path">/api/cepas</span>
+                <div class="description">
+                    Obtiene lista de todas las cepas.
+                    <br>
+                    Parámetros opcionales:
+                    <ul>
+                        <li>orden: Campo por el cual ordenar (nombre, id)</li>
+                        <li>reverso: "si" para orden descendente</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="route-item">
+                <span class="route-method">GET</span>
+                <span class="route-path">/api/cepas/&lt;id_&gt;</span>
+                <div class="description">Obtiene detalles de una cepa específica por ID</div>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <a href="/api/vinos/4823ad54-0a3a-38b8-adf6-795512994a4f">Ver Vino Abducido</a>
-            <div class="descripcion">Detalles completos del vino</div>
-        </div>
-        
-        <div class="menu-item">
-            <a href="/api/vinos?anio=2020&orden=nombre&reverso=no">Vinos del 2020 (orden alfabético)</a>
-            <div class="descripcion">Lista de vinos del año 2020 ordenados por nombre</div>
-        </div>
-        
-        <div class="menu-item">
-            <a href="/api/vinos?anio=2020&orden=nombre&reverso=si">Vinos del 2020 (orden alfabético inverso)</a>
-            <div class="descripcion">Lista de vinos del año 2020 ordenados por nombre en reverso</div>
+
+        <div class="route-section">
+            <h2>Vinos</h2>
+            <div class="route-item">
+                <span class="route-method">GET</span>
+                <span class="route-path">/api/vinos</span>
+                <div class="description">
+                    Obtiene lista de todos los vinos.
+                    <br>
+                    Parámetros opcionales:
+                    <ul>
+                        <li>anio: Filtrar por año</li>
+                        <li>orden: Campo por el cual ordenar (nombre, id, bodega, anio)</li>
+                        <li>reverso: "si" para orden descendente</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="route-item">
+                <span class="route-method">GET</span>
+                <span class="route-path">/api/vinos/&lt;id_&gt;</span>
+                <div class="description">Obtiene detalles de un vino específico por ID</div>
+            </div>
         </div>
     </div>
 </body>
 </html>
 """
 
-app = Flask(__name__)
-api = Api(app)
+def create_app() -> Flask:
+    """
+    Crea y configura la aplicación Flask.
+    
+    Returns:
+        Flask: Instancia configurada de la aplicación Flask
+    """
+    app = Flask(__name__)
+    api = Api(app)
 
-@app.route('/')
-def home():
-    """Renderiza la página principal con el menú de navegación."""
-    return render_template_string(TEMPLATE_HTML)
+    @app.route('/')
+    def home():
+        """Renderiza la página principal con la documentación de la API."""
+        return render_template_string(TEMPLATE_HTML)
 
-# Registrar recursos de la API
-api.add_resource(RecursoBodega, '/api/bodegas/<id>')
-api.add_resource(RecursoBodegas, '/api/bodegas')
-api.add_resource(RecursoCepa, '/api/cepas/<id>')
-api.add_resource(RecursoCepas, '/api/cepas')
-api.add_resource(RecursoVino, '/api/vinos/<id>')
-api.add_resource(RecursoVinos, '/api/vinos')
+    # Registrar recursos de la API
+    api.add_resource(RecursoBodega, '/api/bodegas/<id_>')
+    api.add_resource(RecursoBodegas, '/api/bodegas')
+    api.add_resource(RecursoCepa, '/api/cepas/<id_>')
+    api.add_resource(RecursoCepas, '/api/cepas')
+    api.add_resource(RecursoVino, '/api/vinos/<id_>')
+    api.add_resource(RecursoVinos, '/api/vinos')
+
+    return app
 
 if __name__ == "__main__":
     Vinoteca.inicializar()
+    app = create_app()
     app.run(debug=True)
