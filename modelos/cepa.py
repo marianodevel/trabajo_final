@@ -38,7 +38,7 @@ class Cepa(EntidadVineria):
         todos_vinos = Vinoteca.obtener_vinos()
         return [
             vino for vino in todos_vinos
-            if self.obtener_id() in [cepa.obtener_id() for cepa in vino.obtener_cepas()]
+            if self.obtener_id() in [cepa.obtener_id() for cepa in vino.obtener_cepa()]
         ]
 
     def convertir_a_json(self) -> Dict:

@@ -101,7 +101,7 @@ class Vino(EntidadVineria):
             "id": self.obtener_id(),
             "nombre": self.obtener_nombre(),
             "bodega": self.obtener_bodega().obtener_nombre(),
-            "cepas": [cepa.obtener_nombre() for cepa in self.obtener_cepas()],
+            "cepas": [cepa.obtener_nombre() for cepa in self.obtener_cepa()],
             "partidas": self._partidas
         }
 

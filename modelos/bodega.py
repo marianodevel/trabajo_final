@@ -42,18 +42,35 @@ class Bodega(EntidadVineria):
             if vino.obtener_bodega().obtener_id() == self.obtener_id()
         ]
 
+#    def obtener_cepas(self) -> List['Cepa']:
+#        """
+#        Obtiene todas las cepas de los vinos que pertenecen a esta bodega.
+#        Primero obtiene los vinos de la bodega y luego extrae sus cepas únicas.
+#
+#        Returns:
+#            Lista de cepas únicas utilizadas en los vinos de esta bodega
+#        """
+#        vinos = self.obtener_vinos()
+#        # Usamos set para eliminar duplicados
+#        cepas_unicas = {vino.obtener_cepa() for vino in vinos}
+#        return list(cepas_unicas)
     def obtener_cepas(self) -> List['Cepa']:
         """
         Obtiene todas las cepas de los vinos que pertenecen a esta bodega.
-        Primero obtiene los vinos de la bodega y luego extrae sus cepas únicas.
+        Utiliza los IDs de las cepas para identificar las únicas.
 
         Returns:
             Lista de cepas únicas utilizadas en los vinos de esta bodega
         """
         vinos = self.obtener_vinos()
-        # Usamos set para eliminar duplicados
-        cepas_unicas = {vino.obtener_cepa() for vino in vinos}
-        return list(cepas_unicas)
+        todas_cepas = [cepa for vino in vinos for cepa in vino.obtener_cepa()]
+        
+        # Usamos un diccionario temporal con los IDs como claves
+        cepas_por_id = {}
+        for cepa in todas_cepas:
+            cepas_por_id[cepa.obtener_id()] = cepa
+        
+        return list(cepas_por_id.values())
 
     def convertir_a_json(self) -> dict:
         """
