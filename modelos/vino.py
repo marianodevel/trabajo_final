@@ -41,7 +41,7 @@ class Vino(EntidadVineria):
         """
         self._bodega_id = bodega_id
 
-    def establecer_cepas(self, cepa_ids: List[str]) -> None:
+    def establecer_cepa(self, cepa_ids: List[str]) -> None:
         """
         Establece las cepas del vino.
 
@@ -70,7 +70,7 @@ class Vino(EntidadVineria):
         from vinoteca import Vinoteca
         return Vinoteca.buscar_bodega(self._bodega_id)
 
-    def obtener_cepas(self) -> List['Cepa']:
+    def obtener_cepa(self) -> List['Cepa']:
         """
         Obtiene la lista de objetos Cepa asociados al vino.
         Utiliza el servicio buscarCepa de la clase Vinoteca.

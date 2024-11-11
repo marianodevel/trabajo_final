@@ -113,11 +113,11 @@ def create_app() -> Flask:
         return render_template_string(TEMPLATE_HTML)
 
     # Registrar recursos de la API
-    api.add_resource(RecursoBodega, '/api/bodegas/<id_>')
+    api.add_resource(RecursoBodega, '/api/bodegas/<id>')
     api.add_resource(RecursoBodegas, '/api/bodegas')
-    api.add_resource(RecursoCepa, '/api/cepas/<id_>')
+    api.add_resource(RecursoCepa, '/api/cepas/<id>')
     api.add_resource(RecursoCepas, '/api/cepas')
-    api.add_resource(RecursoVino, '/api/vinos/<id_>')
+    api.add_resource(RecursoVino, '/api/vinos/<id>')
     api.add_resource(RecursoVinos, '/api/vinos')
 
     return app

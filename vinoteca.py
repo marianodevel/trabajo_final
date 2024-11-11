@@ -28,7 +28,7 @@ class Vinoteca:
         cls.__convertirJsonAListas(datos)
 
     @classmethod
-    def obtenerBodegas(
+    def obtener_bodegas(
         cls,
         orden: Optional[str] = None,
         reverso: bool = False
@@ -52,7 +52,7 @@ class Vinoteca:
         return cls.bodegas
 
     @classmethod
-    def obtenerCepas(
+    def obtener_cepas(
         cls,
         orden: Optional[str] = None,
         reverso: bool = False
@@ -76,7 +76,7 @@ class Vinoteca:
         return cls.cepas
 
     @classmethod
-    def obtenerVinos(
+    def obtener_vinos(
         cls,
         anio: Optional[int] = None,
         orden: Optional[str] = None,
@@ -109,7 +109,7 @@ class Vinoteca:
         return vinos_filtrados
 
     @classmethod
-    def buscarBodega(cls, id: str) -> Optional['Bodega']:
+    def buscar_bodega(cls, id: str) -> Optional['Bodega']:
         """
         Busca una bodega por su ID.
 
@@ -125,7 +125,7 @@ class Vinoteca:
         return None
 
     @classmethod
-    def buscarCepa(cls, id: str) -> Optional['Cepa']:
+    def buscar_cepa(cls, id: str) -> Optional['Cepa']:
         """
         Busca una cepa por su ID.
 
@@ -141,7 +141,7 @@ class Vinoteca:
         return None
 
     @classmethod
-    def buscarVino(cls, id: str) -> Optional['Vino']:
+    def buscar_vino(cls, id: str) -> Optional['Vino']:
         """
         Busca un vino por su ID.
 
