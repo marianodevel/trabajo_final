@@ -1,3 +1,7 @@
+import json
+from typing import List, Dict, TYPE_CHECKING
+from .entidad_vineria import EntidadVineria
+
 class Vino(EntidadVineria):
     def __init__(self, id: str, nombre: str, bodega_id: str, 
                  cepa_ids: List[str], partidas: List[int]) -> None:

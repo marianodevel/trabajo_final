@@ -1,3 +1,5 @@
+from typing import List, Optional, Dict, TYPE_CHECKING
+
 class Vinoteca:
     __archivoDeDatos: str = "vinoteca.json"
     __bodegas: List['Bodega'] = []

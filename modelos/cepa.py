@@ -1,3 +1,7 @@
+import json
+from typing import List, Dict, TYPE_CHECKING
+from .entidad_vineria import EntidadVineria
+
 class Cepa(EntidadVineria):
     def __init__(self, id_: str, nombre: str) -> None:
         super().__init__(id_, nombre)

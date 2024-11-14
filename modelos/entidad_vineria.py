@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+from typing import Dict, Any
+
 class EntidadVineria(ABC):
     def __init__(self, id: str, nombre: str) -> None:
         self.__id = id

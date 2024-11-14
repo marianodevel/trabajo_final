@@ -1,3 +1,7 @@
+import json
+from typing import List, TYPE_CHECKING
+from .entidad_vineria import EntidadVineria
+
 class Bodega(EntidadVineria):
     def __init__(self, id: str, nombre: str) -> None:
         super().__init__(id, nombre)
