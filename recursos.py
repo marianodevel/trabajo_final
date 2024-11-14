@@ -121,35 +121,6 @@ class RecursoVino(Resource):
         return {"error": "Vino no encontrado"}, 404
 
 
-#class RecursoVinos(Resource):
-#    """Recurso para manejar endpoints de colección de vinos."""
-#
-#    def get(self):
-#        """
-#        Obtiene lista de todos los vinos con filtrado y ordenamiento opcional.
-#
-#        Returns:
-#            tuple: Respuesta JSON y código de estado HTTP
-#        """
-#        anio = request.args.get("anio")
-#        if anio:
-#            anio = int(anio)
-#        orden = request.args.get("orden")
-#        if orden:
-#            reverso = request.args.get("reverso")
-#            vinos = vinoteca.Vinoteca.obtener_vinos(
-#                anio,
-#                orden=orden,
-#                reverso=reverso == "si"
-#            )
-#        else:
-#            vinos = vinoteca.Vinoteca.obtener_vinos(anio)
-#        return (
-#            json.loads(
-#                json.dumps(vinos, default=lambda o: o.convertir_a_json())
-#            ),
-#            200,
-#        )
 class RecursoVinos(Resource):
     """Recurso para manejar endpoints de colección de vinos."""
 
@@ -165,9 +136,8 @@ class RecursoVinos(Resource):
             anio = int(anio)
         orden = request.args.get("orden")
         if orden:
-            # Agregar guión bajo si el orden es por nombre
             if orden == "nombre":
-                orden = "_nombre"
+                orden = "_Vino__nombre"
             reverso = request.args.get("reverso")
             vinos = vinoteca.Vinoteca.obtener_vinos(
                 anio,
